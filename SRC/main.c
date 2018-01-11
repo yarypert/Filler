@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 02:42:41 by yarypert          #+#    #+#             */
-/*   Updated: 2018/01/09 08:36:48 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/01/11 06:16:33 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int main(void)
 		env->size_y = ft_atoi(&line[8]);
 		env->size_x = ft_atoi(&line[11]);
 		get_map(env);
-		fwtpp(env);
-		put_pieces(env);
+		//fwtpt(env);
+		//put_pieces(env);
 		if (env->end == 1)
 			break;
 	}

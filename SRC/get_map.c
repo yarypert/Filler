@@ -6,11 +6,11 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 07:02:38 by yarypert          #+#    #+#             */
-/*   Updated: 2018/01/09 08:36:22 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/01/11 06:17:42 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "../includes/filler.h"
 
 int		get_map(t_env *env)
 {
@@ -24,6 +24,10 @@ int		get_map(t_env *env)
 	while(i <= env->size_y)
 	{
 		get_next_line(0, &line);
+		if (ft_isdigit(line[0]))
+			env->map[i] = ft_strdup(line + 4);
+		else
+			get_pieces(env, line);
 		i++;
 	}
 	return(0);

@@ -1,29 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tabnew.c                                        :+:      :+:    :+:   */
+/*   get_position.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/09 08:17:23 by yarypert          #+#    #+#             */
-/*   Updated: 2018/01/11 04:11:03 by yarypert         ###   ########.fr       */
+/*   Created: 2018/01/11 02:34:57 by yarypert          #+#    #+#             */
+/*   Updated: 2018/01/11 02:44:56 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/filler.h"
 
-char	**ft_tabnew(size_t x, size_t y)
+void		get_position(t_env *env)
 {
-	char **tab;
 	int i;
+	int j;
 
 	i = 0;
-	tab = (char **)ft_memalloc(sizeof(char *) * y);
-
-	while (i < (int)y)
+	if (env->player == 'O')
+		env->enemy = 'X';
+	else if (env->player == 'X') 
+		env->enemy = 'O';
+	while(i < env->size_y)
 	{
-		tab[i] = (char *)ft_memalloc(sizeof(char) * x);
+		j = 0;
+		while (j < env->size_x)
+		{
+
+			if (env->map[i][j] == env->enemy)
+			{
+			env->epos_x = j;
+			env->epos_y = i;
+			}
+			if (env->map[i][j] == env->player)
+			{
+			env->ppos_x = j;
+			env->ppos_y = i;
+			}
+			j++;
+		}
 		i++;
 	}
-	return (tab);
 }
