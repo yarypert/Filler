@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 07:15:16 by yarypert          #+#    #+#             */
-/*   Updated: 2018/01/09 08:37:02 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/12 14:11:20 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 
 void	put_pieces(t_env *env)
 {
-(void)env;
+	ft_putnbr(env->ppos_y);
+	ft_putchar(' ');
+	ft_putnbr(env->ppos_x);
+	ft_putchar('\n');
 }
