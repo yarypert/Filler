@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 02:57:27 by yarypert          #+#    #+#             */
-/*   Updated: 2018/01/23 22:45:17 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/12 14:52:13 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int **createheat(int **heat, int x, int y)
 	int i;
 	int j;
 	int check = 1;
+
 	while (check > 0)
 	{
 		check = 0;

@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 02:42:41 by yarypert          #+#    #+#             */
-/*   Updated: 2018/02/12 12:44:03 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/12 14:57:25 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ int main(void)
 	char	*line;
 	t_env	*env;
 
+	int i = 0;
 	if (!(env = ft_memalloc(sizeof(t_env))))
 		return (-1);
 	get_next_line(0, &line);
 	env->player = (ft_atoi(line + 10) == 1) ? 'O' : 'X';
-	while (1337)
+	while (i < 100)
 	{
 		get_next_line(0, &line);
 		env->size_y = ft_atoi(&line[8]);
@@ -31,6 +32,7 @@ int main(void)
 		//put_pieces(env);
 		if (env->end == 1)
 			break;
+	i++;
 	}
 	free(env);
 	return 0;
