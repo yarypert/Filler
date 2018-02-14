@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 07:02:38 by yarypert          #+#    #+#             */
-/*   Updated: 2018/01/11 06:17:42 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/12 17:15:05 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		get_map(t_env *env)
 	if (!env->map)
 		if (!(env->map = ft_tabnew(env->size_y, env->size_x)))
 			return (-1);
+	get_next_line(0, &line);
 	while(i <= env->size_y)
 	{
 		get_next_line(0, &line);

@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 08:34:48 by yarypert          #+#    #+#             */
-/*   Updated: 2018/02/12 14:55:58 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/12 16:17:14 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,6 @@ int		get_pieces(t_env *env, char *line)
 {
 	int		i;
 	int		j;
-	FILE *test;
-
-	test = fopen("TEST", "w+");
-
 	i = 0;
 	j = 6;
 	env->psize_y = ft_atoi(&line[j]);
@@ -34,7 +30,6 @@ int		get_pieces(t_env *env, char *line)
 	{
 		get_next_line(0, &line);
 		env->piece[i] = ft_strdup(line);
-	fprintf(test, "%s", env->piece[i]);
 		i++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 02:57:27 by yarypert          #+#    #+#             */
-/*   Updated: 2018/02/14 17:03:26 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/14 17:07:25 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,63 +46,59 @@ char	*read_file(char *file)
 	return (grid);
 }
 
-
-
-int		**heatmap(int x, int y)
+void printintmap(int **intmap)
 {
-	int **heat;
-	int i;
-
-	i = 0;
-	heat = (int **)ft_memalloc(sizeof(int *) * y);
-
-	while (i < y)
-	{
-		heat[i] = (int *)ft_memalloc(sizeof(int) * x);
-		i++;
-	}
-	return (heat);
-}
-
-int **fillmap(int **heat, int x, int y, int posx, int posy)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < y)
+	int i = 0;
+	int j = 0;
+	while (i < 10)
 	{
 		j = 0;
-		while (j < x)
+		while (j < 24)
 		{
-			if (i == posy && j == posx)
-				heat[i][j] = 1;
-			else
-				heat[i][j] = 0;
-			j++;
-		}
-		i++;
-	}
-	return (heat);
-}
-
-void	printtab(int **heat, int x, int y)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < y)
-	{
-		j = 0;
-		while (j < x)
-		{
-			printf("%-4d", heat[i][j]);
+			intmap[i][j]--;
+			printf("%-3d", (intmap[i][j]));
 			j++;
 		}
 		printf("\n");
 		i++;
 	}
+}
+
+void printmap(char **map)
+{
+	int i = 0;
+	int j = 0;
+	while (i < 10)
+	{
+		j = 0;
+		while (j < 24)
+		{
+			ft_putchar(map[i][j]);
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
+}
+
+int		**initheatmap(char **map, int **intmap)
+{
+	int i = 0;
+	int j = 0;
+	while (i < 10)
+	{
+		j = 0;
+		while (j < 24)
+		{
+			if (map[i][j] == 'O' || map[i][j] == 'o')
+				intmap[i][j] = 1;
+			else
+				intmap[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+	return(intmap);
 }
 
 int **createheat(int **heat, int x, int y)
@@ -151,51 +147,32 @@ int **createheat(int **heat, int x, int y)
 	return (heat);
 }
 
-/*
-int		main(int argc, char **argv)
+int		**intheatmap(int x, int y)
 {
-	int **heat;
-	int x;
-	int y;
-	int posx;
-	int posy;
+	int		**heat;
+	int		i;
 
-	x = ft_atoi(argv[1]);
-	y = ft_atoi(argv[2]);
-	posx = ft_atoi(argv[3]);
-	posy = ft_atoi(argv[4]);
-	if (posx > x || posy > y)
-		ft_error("NIKTAMERE");
-	heat = heatmap(x, y);
-	heat = fillmap(heat, x, y, posx, posy);
-	heat = createheat(heat, x, y);
-	printtab(heat,x,y);
-	ft_putendl("////////////////////////////");
-	return 0;
-}*/
-
-int		countbn(char *read)
-{
-	int i;
-	int bn;
 	i = 0;
-	bn = 0;
+	heat = (int **)ft_memalloc(sizeof(int *) * y);
 
-	while (i < ft_strlen(read))
+	while (i < y)
 	{
-		if(read[i] == '\n')
-			bn++;
+		heat[i] = (int *)ft_memalloc(sizeof(int) * x);
 		i++;
 	}
-	return (bn);
+	return (heat);
 }
 
 int main(int argc, char **argv)
 {
-	char **map;
+	char	**map;
+	char	**heat;
+	int		**intmap;
 	if (argc == 2)
 	{
 		map = ft_strsplit(read_file(argv[1]), '\n');
+		intmap = createheat(initheatmap(map, intheatmap(24, 10)), 24, 10);
+		printintmap(intmap);
 	}
 	else
 		return 0;
