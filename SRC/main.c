@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 02:42:41 by yarypert          #+#    #+#             */
-/*   Updated: 2018/02/12 17:43:01 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/26 13:16:56 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ int main(void)
 		env->size_y = ft_atoi(&line[8]);
 		env->size_x = ft_atoi(&line[11]);
 		get_map(env);
-		get_position(env);
+		intheatmap(env);
+		initheatmap(env);
+		createheat(env);
 		if (env->end == 1)
 			break;
 	}

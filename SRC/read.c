@@ -6,13 +6,13 @@
 /*   By: yarypert <yarypert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 07:44:33 by yarypert          #+#    #+#             */
-/*   Updated: 2018/02/14 11:50:00 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/26 13:01:26 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-static char	*ft_strapp(char *str1, char *str2)
+char	*ft_strapp(char *str1, char *str2)
 {
 	char *tmp;
 

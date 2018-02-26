@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 04:07:17 by yarypert          #+#    #+#             */
-/*   Updated: 2018/01/11 06:16:58 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/26 14:16:23 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,35 @@ char			**piece;
 char			**map;
 int				end;
 
+int				**heat;
 }				t_env;
 
+/*
+ * ** get_map.c
+ * */
+
 int				get_map(t_env *env);
+
+/*
+ * ** get_pieces.c
+ * */
+
 int				get_pieces(t_env *env, char *line);
-int				fwtpp(t_env *env);
+
+/*
+ * ** read.c
+ * */
+
+char			*ft_strapp(char *str1, char *str2);
+char			*read_file(char *file);
+
+/*
+ * ** heatmap.c
+ * */
+
+void			initheatmap(t_env *env);
+void			createheat(t_env *env);
+void			intheatmap(t_env *env);
+void			placeenemy(t_env *env);
 
 #endif
