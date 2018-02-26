@@ -9,7 +9,7 @@ int		**initheatmap(char **map, int **intmap)
 		j = 0;
 		while (j < 25)
 		{
-			if (map[i][j] == 'X' || map[i][j] == 'X')
+			if (map[i][j] == 'X' || map[i][j] == 'x')
 				intmap[i][j] = 1;
 			else
 				intmap[i][j] = 0;

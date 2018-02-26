@@ -6,7 +6,7 @@
 /*   By: atgerard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 10:14:48 by atgerard          #+#    #+#             */
-/*   Updated: 2018/02/26 12:52:57 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/26 18:44:38 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	offset(char **piece, t_env *env)
 		i++;
 	env->o_min_x[0] = j;
 	env->o_min_x[1] = i;
+	printf("min xx = %d\n min xy = %d\n min yx = %d\n min yy  %d\n", env->o_min_x[0], env->o_min_x[1], env->o_min_y[0], env->o_min_y[1]);
 }

@@ -5,8 +5,13 @@
 
 typedef struct	s_env
 {
-	int o_min_y[2];
-	int o_min_x[2];
+	int		o_min_y[2];
+	int		o_min_x[2];
+	int		enemyx;
+	int		enemyy;
+	int		playerx;
+	int		playery;
+	int		end;
 }				t_env;
 
 
@@ -46,9 +51,19 @@ void		offset(char **piece, t_env *env);
  * ** place.c
  * */
 
-void		findposition(int **heat, char **piece, char **map);
-void		can_pose_it(char **map, char **piece, int pcdx, int pcdy);
-void		can_pose_it_two(char **map, char **piece, int pcdx, int pcdy);
+void		findposition(int **heat, char **piece, char **map, t_env *env);
+void		findpositionenemy(int **heat, char **piece, char **map, t_env *env);
+void		can_place_it(char **map, char **piece, t_env *env);
 int			piece_size(char **piece, char axe);
+
+/*
+ * ** canplace.c
+ * */
+
+int			cpul(char **piece, char **map, t_env *env);
+int			cpur(char **piece, char **map, t_env *env);
+int			cpll(char **piece, char **map, t_env *env);
+int			cplr(char **piece, char **map, t_env *env);
+void		canplaceit(char **map, char **piece, t_env *env);
 
 #endif
