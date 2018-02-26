@@ -6,19 +6,17 @@
 /*   By: atgerard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 10:14:48 by atgerard          #+#    #+#             */
-/*   Updated: 2018/02/26 10:49:44 by atgerard         ###   ########.fr       */
+/*   Updated: 2018/02/26 12:52:57 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-void	offset(char **piece)
+void	offset(char **piece, t_env *env)
 {
 	int		i;
 	int		j;
 	int		start;
-	int		o_min_y[2];
-	int		o_min_x[2];
 	int		save_min_x;
 
 	save_min_x = 0;
@@ -33,9 +31,9 @@ void	offset(char **piece)
 			if (piece[i][j] == '*' && start == 0)
 			{
 				start = 1;
-				o_min_y[0] = j;
-				o_min_y[1] = i;
-				save_min_x = o_min_y[0];
+				env->o_min_y[0] = j;
+				env->o_min_y[1] = i;
+				save_min_x = env->o_min_y[0];
 			}
 			if (piece[i][j] == '*' && j < save_min_x)
 				save_min_x = j;
@@ -47,6 +45,6 @@ void	offset(char **piece)
 	j = save_min_x;
 	while (piece[i][j] != '*')
 		i++;
-	o_min_x[0] = j;
-	o_min_x[1] = i;
+	env->o_min_x[0] = j;
+	env->o_min_x[1] = i;
 }

@@ -3,6 +3,13 @@
 
 #include "../../libft/libft.h"
 
+typedef struct	s_env
+{
+	int o_min_y[2];
+	int o_min_x[2];
+}				t_env;
+
+
 /*
  * **   main.c
  * */
@@ -33,6 +40,12 @@ int			**initheatmap(char **map, int **intmap);
 * ** offset.c
 * */
 
-void		offset(char **piece);
+void		offset(char **piece, t_env *env);
+
+/*
+ * ** place.c
+ * */
+
+void		findposition(int **heat, char **piece);
 
 #endif

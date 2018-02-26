@@ -36,7 +36,6 @@ void printintmap(int **intmap)
 		j = 0;
 		while (j < 25)
 		{
-			intmap[i][j]--;
 			printf("%-3d", (intmap[i][j]));
 			j++;
 		}

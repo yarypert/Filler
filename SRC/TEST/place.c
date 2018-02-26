@@ -17,30 +17,30 @@ void findposition(int **heat, char **piece)
 			j = 0;
 			while (j < 25)
 			{
-				if(heat[i][j] == -1)
+				if(heat[i][j] == 0)
 				{
-					if (j - 1 >= 0 && (heat[i][j - 1] != -1 && heat[i][j - 1] < pcd))
+					if (j - 1 >= 0 && (heat[i][j - 1] != 0 && heat[i][j - 1] < pcd))
 					{
 						pcd = heat[i][j - 1];
 						pcdx = j - 1;
 						pcdy = i;
 						check = 1;
 					}
-					if (j+1 <= 24 && (heat[i][j + 1] != -1 && heat[i][j + 1] < pcd))
+					if (j+1 <= 24 && (heat[i][j + 1] != 0 && heat[i][j + 1] < pcd))
 					{
 						pcd = heat[i][j + 1];
 						pcdx = j + 1;
 						pcdy = i;
 						check = 1;
 					}
-					if (i-1 >= 0 && (heat[i - 1][j] != -1 && heat[i-1][j] < pcd))
+					if (i-1 >= 0 && (heat[i - 1][j] != 0 && heat[i-1][j] < pcd))
 					{
 						pcd = heat[i - 1][j];
 						pcdx = j;
 						pcdy = i - 1;
 						check = 1;
 					}
-					if (i + 1 <= 10 && (heat[i + 1][j] != -1 && heat[i+1][j] < pcd))
+					if (i + 1 <= 10 && (heat[i + 1][j] != 0 && heat[i+1][j] < pcd))
 					{
 						pcd = heat[i + 1][j];
 						pcdx = j;
@@ -53,4 +53,5 @@ void findposition(int **heat, char **piece)
 			i++;
 		}
 	}
+	printf("la piece doit contenir la case en X = %d et Y = %d\n", pcdx, pcdy);
 }
