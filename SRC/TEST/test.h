@@ -29,4 +29,10 @@ int			**intheatmap(int x, int y);
 int			**createheat(char **map, int **heat, int x, int y);
 int			**initheatmap(char **map, int **intmap);
 
+/*
+* ** offset.c
+* */
+
+void		offset(char **piece);
+
 #endif
