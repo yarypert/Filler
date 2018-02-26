@@ -6,7 +6,7 @@
 /*   By: atgerard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 10:14:48 by atgerard          #+#    #+#             */
-/*   Updated: 2018/02/26 10:43:12 by atgerard         ###   ########.fr       */
+/*   Updated: 2018/02/26 10:49:44 by atgerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,4 @@ void	offset(char **piece)
 		i++;
 	o_min_x[0] = j;
 	o_min_x[1] = i;
-	printf("\n\n\n\n\no_min_x[%d][%d] ------ o_min_y [%d][%d]\n\n\n\n", o_min_x[0], o_min_x[1], o_min_y[0], o_min_y[1]);
 }
