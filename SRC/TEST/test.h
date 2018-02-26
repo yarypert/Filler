@@ -5,7 +5,7 @@
 
 /*
  * **   main.c
- * * */
+ * */
 
 void		backtoplayer(int **heat, int pcdx, int pcdy);
 char		*read_file(char *file);
