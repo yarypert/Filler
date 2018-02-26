@@ -46,6 +46,9 @@ void		offset(char **piece, t_env *env);
  * ** place.c
  * */
 
-void		findposition(int **heat, char **piece);
+void		findposition(int **heat, char **piece, char **map);
+void		can_pose_it(char **map, char **piece, int pcdx, int pcdy);
+void		can_pose_it_two(char **map, char **piece, int pcdx, int pcdy);
+int			piece_size(char **piece, char axe);
 
 #endif

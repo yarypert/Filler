@@ -1,6 +1,6 @@
 #include "test.h"
 
-void findposition(int **heat, char **piece)
+void findposition(int **heat, char **piece, char **map)
 {
 	int i;
 	int j;
@@ -8,6 +8,8 @@ void findposition(int **heat, char **piece)
 	int pcd = 2147483647;
 	int pcdx = 0;
 	int pcdy = 0;
+
+	(void)piece;
 	while (check > 0)
 	{
 		check = 0;
@@ -54,4 +56,100 @@ void findposition(int **heat, char **piece)
 		}
 	}
 	printf("la piece doit contenir la case en X = %d et Y = %d\n", pcdx, pcdy);
+	can_pose_it(map, piece, pcdx, pcdy);
+}
+
+int		piece_size(char **piece, char axe)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	while (piece[i])
+	{
+		j = 0;
+		while (piece[i][j])
+			j++;
+		i++;
+	}
+	if (axe == 'x')
+		return (j);
+	return (i);
+}
+void	can_pose_it_two(char **map, char **piece, int pcdx, int pcdy)
+{
+	int		p_size_y;
+	int		imap;
+	int		jmap;
+	int		test;
+	int		save;
+
+	test = 0;
+	jmap = pcdy;
+	imap = pcdx;
+	p_size_y = piece_size(piece, 'y');
+	save = p_size_y;
+	if ((map[jmap][imap] == '.') && (imap >= 0 && jmap >= 0))
+	{
+		jmap--;
+		test++;
+		p_size_y--;
+		while (p_size_y > 0)
+		{
+			if ((map[jmap][imap] == '.') && (imap >= 0 && jmap >= 0))
+			{
+				jmap--;
+				p_size_y--;
+				test++;
+			}
+			else
+			{
+				ft_putendl("La piece ne passe pas");
+				exit(1);
+			}
+		}
+	}
+	if (test == save)
+		ft_putendl("La piece rentre");
+	else
+		ft_putendl("La piece ne passe pas");
+}
+
+void	can_pose_it(char **map, char **piece, int pcdx, int pcdy)
+{
+	int		p_size_x;
+	int		imap;
+	int		jmap;
+	int		test;
+	int		save;
+
+	test = 0;
+	jmap = pcdy;
+	imap = pcdx;
+	p_size_x = piece_size(piece, 'x');
+	save = p_size_x;
+	if ((map[jmap][imap] == '.') && (imap >= 0 && jmap >= 0))
+	{
+		imap--;
+		test++;
+		p_size_x--;
+		while (p_size_x > 0)
+		{
+			if ((map[jmap][imap] == '.') && (imap >= 0 && jmap >= 0))
+			{
+				imap--;
+				p_size_x--;
+				test++;
+			}
+			else
+			{
+				ft_putendl("La piece ne passe pas");
+				exit(1);
+			}
+		}
+	}
+	if (test == save)
+		can_pose_it_two(map, piece, pcdx, pcdy);
+	else
+		ft_putendl("La piece ne passe pas");
 }

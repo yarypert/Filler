@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 02:57:27 by yarypert          #+#    #+#             */
-/*   Updated: 2018/02/26 12:53:41 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/26 13:22:17 by atgerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,15 @@ int		main(int argc, char **argv)
 	int		**intmap;
 	char	**piece;
 	t_env	env;
+
+	(void)heat;
 	if (argc == 3)
 	{
 		map = ft_strsplit(read_file(argv[1]), '\n');
 		piece = ft_strsplit(read_file(argv[2]), '\n');
 		offset(piece, &env);
 		intmap = createheat(map, initheatmap(map, intheatmap(25, 10)), 25, 10);
-	findposition(intmap, piece);
+		findposition(intmap, piece, map);
 		printintmap(intmap);
 		printpiece(piece);
 	}
