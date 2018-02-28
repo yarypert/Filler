@@ -5,13 +5,16 @@
 
 typedef struct	s_env
 {
-	int		o_min_y[2];
-	int		o_min_x[2];
 	int		enemyx;
 	int		enemyy;
 	int		playerx;
 	int		playery;
 	int		end;
+	int placex;
+	int placey;
+	int i;
+	int j;
+	int X;
 }				t_env;
 
 
@@ -45,7 +48,10 @@ int			**initheatmap(char **map, int **intmap);
 * ** offset.c
 * */
 
-void		offset(char **piece, t_env *env);
+void		offset_ul(char **piece, t_env *env);
+void		offset_ur(char **piece, t_env *env);
+void		offset_ll(char **piece, t_env *env);
+void		offset_lr(char **piece, t_env *env);
 
 /*
  * ** place.c

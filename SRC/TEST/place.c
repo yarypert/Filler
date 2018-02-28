@@ -117,7 +117,6 @@ void findpositionenemy(int **heat, char **piece, char **map, t_env *env)
 	}
 	env->enemyx = pcdx;
 	env->enemyy = pcdy;
-	printf("la piece doit contenir la case en X = %d et Y = %d\n", pcdx, pcdy);
 }
 
 int		piece_size(char **piece, char axe)

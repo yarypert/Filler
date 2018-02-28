@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 02:57:27 by yarypert          #+#    #+#             */
-/*   Updated: 2018/02/26 18:48:02 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/02/28 18:50:12 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,16 @@ char	**invert(char **heat)
 	return(heat);
 }
 
+void	init(t_env *env)
+{
+	env->i = 0;
+	env->j = 0;
+	env->placex = 0;
+	env->placey = 0;
+	env->X = 0;
+
+}
+
 int		main(int argc, char **argv)
 {
 	char	**map;
@@ -99,21 +109,21 @@ int		main(int argc, char **argv)
 	(void)heat;
 	if (argc == 3)
 	{
+		init(&env);
 		map = ft_strsplit(read_file(argv[1]), '\n');
 		piece = ft_strsplit(read_file(argv[2]), '\n');
-		//offset(piece, &env);
-		//intmap = createheat(map, initheatmap(map, intheatmap(25, 10)), 25, 10);
-		//mapenemy = invert(map);
-		//intmapenemy = createheat(map, initheatmap(mapenemy, intheatmap(25, 10)), 25, 10);
-		//findposition(intmap, piece, map, &env);
-		//findpositionenemy(intmapenemy, piece, mapenemy, &env);
-		//can_pose_it(map,piece,&env);
-		//printintmap(intmap);
-		//printf("\n\n");
-		//printintmap(intmapenemy);
+		intmap = createheat(map, initheatmap(map, intheatmap(25, 10)), 25, 10);
+		mapenemy = invert(map);
+		intmapenemy = createheat(map, initheatmap(mapenemy, intheatmap(25, 10)), 25, 10);
+		findposition(intmap, piece, map, &env);
+		findpositionenemy(intmapenemy, piece, mapenemy, &env);
+		canplaceit(map,piece,&env);
+		printmap(map);
+		printintmap(intmap);
+		printf("\n\n");
+		printintmap(intmapenemy);
 		printpiece(piece);
 		printf("\n");
-		offset(piece, &env);
 	}
 	else
 		ft_putendl("Not Right Arguments Number");
