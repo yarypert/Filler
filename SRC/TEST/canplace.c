@@ -1,48 +1,80 @@
 #include "test.h"
 
-int		cpur(char **piece, char **map, t_env *env)
+int		compare(t_env *env)
 {
-	int can = 0;
-	return(can);
+	int i;
+	int j;
+	int pi;
+	int pj;
+	int contact = 0;
+	env->heatpiece = 0;
+	pi = 0;
+	i = env->mapi;
+	while (pi < env->piecey)
+	{
+		pj = 0;
+		j = env->mapj;
+		while (pj < env->piecex)
+		{
+			if ((env->map[i][j] == 'X' || env->map[i][j] == 'x') && env->piece[pi][pj] == '*' && contact == 0)
+				contact++;
+			else if ((env->map[i][j] == 'X' || env->map[i][j] == 'x') && env->piece[pi][pj] == '*' && contact != 0)
+				return(0);
+			else if ((env->map[i][j] == 'O' || env->map[i][j] == 'o') && env->piece[pi][pj] == '*')
+				return(0);
+			else if (env->map[i][j] == '.' && env->piece[pi][pj] == '*')
+				env->heatpiece = env->heatpiece + env->heat[i][j];
+			pj++;
+			j++;
+		}
+		pi++;
+		i++;
+	}
+	if (contact != 1)
+		return(0);
+	return(1);
 }
 
-int		cpll(char **piece, char **map, t_env *env)
+void	findposition(t_env *env)
 {
-	int can = 0;
-	return(can);
+	int heatsave = 2147483647;
+	env->mapi = 0;
+	while (env->mapi < env->mapy - (env->piecey - 1))
+	{
+		env->mapj = 0;
+		while (env->mapj < env->mapx - (env->piecex - 1))
+		{
+			if (compare(env) == 1)
+			{
+				if (env->heatpiece < heatsave)
+				{
+					heatsave = env->heatpiece;
+					env->finalx = env->mapj;
+					env->finaly = env->mapi;
+				}
+			else
+				env->end = 1;
+			}
+			env->mapj++;
+		}
+		env->mapi++;
+	}
 }
 
-int		cplr(char **piece, char **map, t_env *env)
+int		canplace(t_env *env)
 {
 	int can = 0;
-	return(can);
-}
-int		cpul(char **piece, char **map, t_env *env)
-{
-	int can = 0;
-	int	p_size_y = 2;
-	int	p_size_x = 3;
 	int	i = 0;
 	int	j = 0;
 	int indx = 0;
 	int indy = 0;
-	int okay = p_size_x * p_size_y;
+	int okay = env->piecex * env->piecey;
 
-	j = env->playerx;
-	while (j < 10 && j >= 0 && indy < p_size_y)
+	while (j < env->mapy && j >= 0 && indy < env->piecey)
 	{
-		i = env->playery;
 		indx = 0;
-		while (i < 25 && i >= 0 && indx < p_size_x)
+		while (i < env->mapx && i >= 0 && indx < env->piecex)
 		{
-			if (map[i][j] == '.' && piece[indy][indx] == '*')
-				okay--;
-			else if (map[i][j] == '.' && piece[indy][indx] == '.')
-				okay--;
-			else if (map[i][j] != '.' && piece[indy][indx] == '*')
-				;
-			else if (map[i][j] != '.' && piece[indy][indx] == '.')
-				okay--;
 			indx++;
 			i++;
 		}
@@ -54,36 +86,4 @@ int		cpul(char **piece, char **map, t_env *env)
 	else
 		can = 0;
 	return(can);
-}
-
-void	canplaceit(char **map, char **piece, t_env *env)
-{
-	env->placex = env->playerx - (3 - env->i);
-	env->placey = env->playery - (2 - env->j);
-	if(env->enemyx < env->playerx && env->enemyy <= env->playery)
-	{
-		if (cpul(piece, map, env) == 1)
-		{
-			printf("la piece peut etre posee en X = %d et Y = %d\n",env->placex, env->placey);
-			env->i = 0;
-			env->j = 0;
-		}
-		else
-
-	}
-	else if(env->enemyx >= env->playerx && env->enemyy < env->playery)
-	{
-		if (cpur(piece, map, env) == 1)
-			;
-	}
-	else if(env->enemyx <= env->playerx && env->enemyy > env->playery)
-	{
-		if (cpll(piece, map, env) == 1)
-			;
-	}
-	else if(env->enemyx > env->playerx && env->enemyy >= env->playery)
-	{
-		if (cplr(piece, map, env) == 1)
-			;
-	}
 }

@@ -1,15 +1,15 @@
 #include "test.h"
 
-void	printpiece(char **piece)
+void	printpiece(t_env *env)
 {
 	int i = 0;
 	int j = 0;
-	while (i < 3)
+	while (i < env->piecey)
 	{
-		j	 = 0;
-		while (j < 4)
+		j = 0;
+		while (j < env->piecex)
 		{
-			ft_putchar(piece[i][j]);
+			ft_putchar(env->piece[i][j]);
 			j++;
 		}
 		ft_putchar('\n');
@@ -17,26 +17,16 @@ void	printpiece(char **piece)
 	}
 }
 
-void	printposition(int x, int y)
-{
-	ft_putstr("coordonees X = ");
-	ft_putnbr(x);
-	ft_putstr("\n\n");
-	ft_putstr("coordonees Y = ");
-	ft_putnbr(y);
-	ft_putstr("\n");
-}
-
-void printintmap(int **intmap)
+void	printintmap(t_env *env)
 {
 	int i = 0;
 	int j = 0;
-	while (i < 10)
+	while (i < env->mapy)
 	{
 		j = 0;
-		while (j < 25)
+		while (j < env->mapx)
 		{
-			printf("%-3d", (intmap[i][j]));
+			printf("%-3d", (env->heat[i][j]));
 			j++;
 		}
 		printf("\n");
@@ -44,16 +34,16 @@ void printintmap(int **intmap)
 	}
 }
 
-void printmap(char **map)
+void	printmap(t_env *env)
 {
 	int i = 0;
 	int j = 0;
-	while (i < 10)
+	while (i < env->mapy)
 	{
 		j = 0;
-		while (j < 25)
+		while (j < env->mapx)
 		{
-			ft_putchar(map[i][j]);
+			ft_putchar(env->map[i][j]);
 			j++;
 		}
 		ft_putchar('\n');

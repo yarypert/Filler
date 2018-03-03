@@ -46,84 +46,42 @@ char	*read_file(char *file)
 	return (grid);
 }
 
-int **placeenemy(char **map, int **heat, int x, int y)
+void	size(t_env *env)
 {
-	int i;
-	int j;
-	i = 0;
-	while (i < y)
+	int i = 0;
+	while (env->piece[i])
 	{
-		j = 0;
-		while (j < x)
-		{
-			if (map[i][j] == 'o' || map[i][j] == 'O')
-				heat[i][j] = 0;
-			j++;
-		}
+		env->piecex = ft_strlen(env->piece[0]);
 		i++;
 	}
-	return(heat);
-}
-
-char	**invert(char **heat)
-{
-	int i;
-	int j;
+	env->piecey = i;
 	i = 0;
-	while (i < 10)
+	while (env->map[i])
 	{
-		j = 0;
-		while (j < 25)
-		{
-			if (heat[i][j] == 'X')
-				heat[i][j] = 'O';
-			else if (heat[i][j] == 'O')
-				heat[i][j] = 'X';
-			j++;
-		}
+		env->mapx = ft_strlen(env->map[0]);
 		i++;
 	}
-	return(heat);
+	env->mapy = i;
 }
 
-void	init(t_env *env)
-{
-	env->i = 0;
-	env->j = 0;
-	env->placex = 0;
-	env->placey = 0;
-	env->X = 0;
-
-}
 
 int		main(int argc, char **argv)
 {
-	char	**map;
-	char	**heat;
-	int		**intmap;
-	char	**piece;
-	int		**intmapenemy;
-	char	**mapenemy;
 	t_env	env;
 
-	(void)heat;
 	if (argc == 3)
 	{
-		init(&env);
-		map = ft_strsplit(read_file(argv[1]), '\n');
-		piece = ft_strsplit(read_file(argv[2]), '\n');
-		intmap = createheat(map, initheatmap(map, intheatmap(25, 10)), 25, 10);
-		mapenemy = invert(map);
-		intmapenemy = createheat(map, initheatmap(mapenemy, intheatmap(25, 10)), 25, 10);
-		findposition(intmap, piece, map, &env);
-		findpositionenemy(intmapenemy, piece, mapenemy, &env);
-		canplaceit(map,piece,&env);
-		printmap(map);
-		printintmap(intmap);
-		printf("\n\n");
-		printintmap(intmapenemy);
-		printpiece(piece);
-		printf("\n");
+		env.map = ft_strsplit(read_file(argv[1]), '\n');
+		env.piece = ft_strsplit(read_file(argv[2]), '\n');
+		size(&env);
+		intheatmap(&env);
+		initheatmap(&env);
+		createheat(&env);
+		printmap(&env);
+		printintmap(&env);
+		printpiece(&env);
+		findposition(&env);
+		printf("poser la piece en X %d\n et poser la piece en Y%d\n", env.finalx, env.finaly);
 	}
 	else
 		ft_putendl("Not Right Arguments Number");

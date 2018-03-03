@@ -5,71 +5,36 @@
 
 typedef struct	s_env
 {
-	int		enemyx;
-	int		enemyy;
-	int		playerx;
-	int		playery;
+	int finalx;
+	int finaly;
+	int mapi;
+	int mapj;
+	char **map;
+	char **piece;
+	int **heat;
+	int mapx;
+	int mapy;
+	int piecex;
+	int piecey;
+	int	heatpiece;
 	int		end;
-	int placex;
-	int placey;
-	int i;
-	int j;
-	int X;
 }				t_env;
 
 
-/*
- * **   main.c
- * */
 
-void		backtoplayer(int **heat, int pcdx, int pcdy);
+
 char		*read_file(char *file);
-int			**placeenemy(char **map, int **heat, int x, int y);
 char		*ft_strapp(char *str1, char *str2);
 
-/*
- * ** display.c
- * */
+void		printmap(t_env *env);
+void		printintmap(t_env *env);
+void		printpiece(t_env *env);
 
-void		printmap(char **map);
-void		printintmap(int **intmap);
-void		printposition(int x, int y);
-void		printpiece(char **piece);
 
-/*
- * ** heatmap.c
- * */
+void		intheatmap(t_env *env);
+void		createheat(t_env *env);
+void		initheatmap(t_env *env);
 
-int			**intheatmap(int x, int y);
-int			**createheat(char **map, int **heat, int x, int y);
-int			**initheatmap(char **map, int **intmap);
-
-/*
-* ** offset.c
-* */
-
-void		offset_ul(char **piece, t_env *env);
-void		offset_ur(char **piece, t_env *env);
-void		offset_ll(char **piece, t_env *env);
-void		offset_lr(char **piece, t_env *env);
-
-/*
- * ** place.c
- * */
-
-void		findposition(int **heat, char **piece, char **map, t_env *env);
-void		findpositionenemy(int **heat, char **piece, char **map, t_env *env);
-void		can_place_it(char **map, char **piece, t_env *env);
-int			piece_size(char **piece, char axe);
-
-/*
- * ** canplace.c
- * */
-
-int			cpul(char **piece, char **map, t_env *env);
-int			cpur(char **piece, char **map, t_env *env);
-int			cpll(char **piece, char **map, t_env *env);
-int			cplr(char **piece, char **map, t_env *env);
-void		canplaceit(char **map, char **piece, t_env *env);
-
+int			canplace(t_env *env);
+void		findposition(t_env *env);
 #endif

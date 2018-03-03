@@ -1,26 +1,25 @@
 #include "test.h"
 
-int		**initheatmap(char **map, int **intmap)
+void	initheatmap(t_env *env)
 {
 	int i = 0;
 	int j = 0;
-	while (i < 10)
+	while (i < env->mapy)
 	{
 		j = 0;
-		while (j < 25)
+		while (j < env->mapx)
 		{
-			if (map[i][j] == 'X' || map[i][j] == 'x')
-				intmap[i][j] = 1;
+			if (env->map[i][j] == 'O' || env->map[i][j] == 'o')
+				env->heat[i][j] = 1;
 			else
-				intmap[i][j] = 0;
+				env->heat[i][j] = 0;
 			j++;
 		}
 		i++;
 	}
-	return(intmap);
 }
 
-int **createheat(char **map, int **heat, int x, int y)
+void	createheat(t_env *env)
 {
 	int i;
 	int j;
@@ -30,31 +29,31 @@ int **createheat(char **map, int **heat, int x, int y)
 	{
 		check = 0;
 		i = 0;
-		while (i < y)
+		while (i < env->mapy)
 		{
 			j = 0;
-			while (j < x)
+			while (j < env->mapx)
 			{
-				if (heat[i][j] > 0)
+				if (env->heat[i][j] > 0)
 				{
-					if (i + 1 < y && ((heat[i+1][j] > heat[i][j] + 1) || (heat[i+1][j] == 0)))
+					if (i + 1 < env->mapy && ((env->heat[i+1][j] > env->heat[i][j] + 1) || (env->heat[i+1][j] == 0)))
 					{
-						heat[i+1][j] = heat[i][j] + 1;
+						env->heat[i+1][j] = env->heat[i][j] + 1;
 						check = 1;
 					}
-					if (j + 1 < x && ((heat[i][j+1] > heat[i][j] + 1) || (heat[i][j+1] == 0)))
+					if (j + 1 < env->mapx && ((env->heat[i][j+1] > env->heat[i][j] + 1) || (env->heat[i][j+1] == 0)))
 					{
-						heat[i][j+1] = heat[i][j] + 1;
+						env->heat[i][j+1] = env->heat[i][j] + 1;
 						check = 1;
 					}
-					if (i - 1 >= 0 && ((heat[i-1][j] > heat[i][j] + 1) || (heat[i-1][j] == 0)))
+					if (i - 1 >= 0 && ((env->heat[i-1][j] > env->heat[i][j] + 1) || (env->heat[i-1][j] == 0)))
 					{
-						heat[i-1][j] = heat[i][j] + 1;
+						env->heat[i-1][j] = env->heat[i][j] + 1;
 						check = 1;
 					}
-					if (j - 1 >= 0 && ((heat[i][j-1] > heat[i][j] + 1) || (heat[i][j-1] == 0)))
+					if (j - 1 >= 0 && ((env->heat[i][j-1] > env->heat[i][j] + 1) || (env->heat[i][j-1] == 0)))
 					{
-						heat[i][j-1] = heat[i][j] + 1;
+						env->heat[i][j-1] = env->heat[i][j] + 1;
 						check = 1;
 					}
 				}
@@ -63,22 +62,18 @@ int **createheat(char **map, int **heat, int x, int y)
 			i++;
 		}
 	}
-	heat = placeenemy(map, heat, x, y);
-	return (heat);
 }
 
-int		**intheatmap(int x, int y)
+void	intheatmap(t_env *env)
 {
-	int	**heat;
 	int	i;
 
 	i = 0;
-	heat = (int **)ft_memalloc(sizeof(int *) * y);
+	env->heat = (int **)ft_memalloc(sizeof(int *) * env->mapy);
 
-	while (i < y)
+	while (i < env->mapy)
 	{
-		heat[i] = (int *)ft_memalloc(sizeof(int) * x);
+		env->heat[i] = (int *)ft_memalloc(sizeof(int) * env->mapx);
 		i++;
 	}
-	return (heat);
 }
