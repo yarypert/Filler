@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 04:18:51 by yarypert          #+#    #+#             */
-/*   Updated: 2018/03/07 14:22:14 by atgerard         ###   ########.fr       */
+/*   Updated: 2018/03/07 16:14:33 by atgerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 
 int		countpiece(t_env *env)
 {
-	int i = 0;
-	int j = 0;
-	int count = 0;
+	int i;
+	int j;
+	int count;
+
+	i = 0;
+	j = 0;
+	count = 0;
 	while (i < env->psize_y)
 	{
 		j = 0;
-		while(j < env->psize_x)
+		while (j < env->psize_x)
 		{
 			if (env->piece[i][j] == '*')
 				count++;
@@ -28,73 +32,78 @@ int		countpiece(t_env *env)
 		}
 		i++;
 	}
-	return(count);
+	return (count);
 }
 
-void	put_pieces(t_env *env)
+int		dtw(int i, int j, t_env *env)
 {
-	ft_putnbr(env->finaly);
-	ft_putchar(' ');
-	ft_putnbr(env->finalx);
-	ft_putchar('\n');
-	free(env->map);
-	free(env->piece);
-	env->map = NULL;
-	env->piece = NULL;
+	if ((i < 0 || j < 0) || (i >= env->size_y || j >= env->size_x))
+		;
+	else if ((env->map[i][j] == env->player ||
+				env->map[i][j] == env->player + 32)
+			&& (env->piece[env->pi][env->pj] == '*' && env->c == 0))
+	{
+		env->co++;
+		env->c++;
+	}
+	else if ((env->map[i][j] == env->player ||
+				env->map[i][j] == env->player + 32)
+			&& (env->piece[env->pi][env->pj] == '*' && env->c != 0))
+		return (0);
+	else if ((env->map[i][j] == env->enemy
+				|| env->map[i][j] == env->enemy + 32)
+			&& (env->piece[env->pi][env->pj] == '*'))
+		return (0);
+	else if (env->map[i][j] == '.' && env->piece[env->pi][env->pj] == '*')
+	{
+		env->heatpiece = env->heatpiece + env->heat[i][j];
+		env->co++;
+	}
+	return (1);
 }
 
 int		compare(t_env *env)
 {
 	int i;
 	int j;
-	int pi;
-	int pj;
-	int contact = 0;
-	int count = 0;
+
+	env->c = 0;
+	env->co = 0;
 	env->heatpiece = 0;
-	pi = 0;
+	env->pi = 0;
 	i = env->mapi;
-	while (pi < env->psize_y)
+	while (env->pi < env->psize_y)
 	{
-		pj = 0;
+		env->pj = 0;
 		j = env->mapj;
-		while (pj < env->psize_x)
+		while (env->pj < env->psize_x)
 		{
-			if ((i < 0 || j < 0) || (i >= env->size_y || j >= env->size_x))
-				;
-			else if ((env->map[i][j] == env->player || env->map[i][j] == env->player + 32) && env->piece[pi][pj] == '*' && contact == 0)
-			{
-				count++;
-				contact++;
-			}
-			else if ((env->map[i][j] == env->player || env->map[i][j] == env->player + 32) && env->piece[pi][pj] == '*' && contact != 0)
-				return(0);
-			else if ((env->map[i][j] == env->enemy || env->map[i][j] == env->enemy + 32) && env->piece[pi][pj] == '*')
-				return(0);
-			else if (env->map[i][j] == '.' && env->piece[pi][pj] == '*')
-			{
-				env->heatpiece = env->heatpiece + env->heat[i][j];
-				count++;
-			}
-			pj++;
+			if (dtw(i, j, env) == 0)
+				return (0);
+			env->pj++;
 			j++;
 		}
-		pi++;
+		env->pi++;
 		i++;
 	}
-	if (contact != 1 || count != env->count)
-		return(0);
-	return(1);
+	if (env->c != 1 || env->co != env->count)
+		return (0);
+	return (1);
 }
 
-void	findposition(t_env *env)
+void	init_for_fp(t_env *env)
 {
 	env->countend = 0;
 	env->finalx = 0;
 	env->finaly = 0;
-	int heatsave = 2147483647;
 	env->count = countpiece(env);
 	env->mapi = 0 - (env->psize_y - 1);
+	env->heatsave = 2147483647;
+}
+
+void	findposition(t_env *env)
+{
+	init_for_fp(env);
 	while (env->mapi <= env->size_y - (env->psize_y) + 1)
 	{
 		env->mapj = 0 - (env->psize_x - 1);
@@ -102,9 +111,9 @@ void	findposition(t_env *env)
 		{
 			if (compare(env) == 1)
 			{
-				if (env->heatpiece < heatsave)
+				if (env->heatpiece < env->heatsave)
 				{
-					heatsave = env->heatpiece;
+					env->heatsave = env->heatpiece;
 					env->finalx = env->mapj;
 					env->finaly = env->mapi;
 				}
@@ -115,6 +124,6 @@ void	findposition(t_env *env)
 		}
 		env->mapi++;
 	}
-	if(env->countend == (env->size_y + 1) * (env->size_x + 1))
+	if (env->countend == (env->size_y + 1) * (env->size_x + 1))
 		env->end = 1;
 }

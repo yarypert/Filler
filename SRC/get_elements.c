@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 13:17:21 by yarypert          #+#    #+#             */
-/*   Updated: 2018/03/07 14:24:06 by atgerard         ###   ########.fr       */
+/*   Updated: 2018/03/07 15:41:59 by atgerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		get_map(t_env *env)
 			get_pieces(env, line);
 		i++;
 	}
-	free (line);
+	free(line);
 	return (0);
 }
 
@@ -59,6 +59,6 @@ int		get_pieces(t_env *env, char *line)
 		env->piece[i] = ft_strdup(line);
 		i++;
 	}
-	free (line);
+	free(line);
 	return (0);
 }
