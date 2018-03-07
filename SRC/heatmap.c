@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 04:19:03 by yarypert          #+#    #+#             */
-/*   Updated: 2018/03/07 16:34:37 by atgerard         ###   ########.fr       */
+/*   Updated: 2018/03/07 17:28:21 by atgerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,40 @@ void	initheatmap(t_env *env)
 	}
 }
 
+void	test(int *i, int *j, int *check, t_env *env)
+{
+	env->heat[*i + 1][*j] = env->heat[*i][*j] + 1;
+	*check = 1;
+}
+
+void	ma_fonction(int *j, int *i, int *check, t_env *env)
+{
+	if (env->heat[*i][*j] > 0)
+	{
+		if ((*i + 1 < env->size_y) && ((env->heat[*i + 1][*j] >
+env->heat[*i][*j] + 1) || (env->heat[*i + 1][*j] == 0)))
+			test(i, j, check, env);
+		if ((*j + 1 < env->size_x) && ((env->heat[*i][*j + 1] >
+env->heat[*i][*j] + 1) || (env->heat[*i][*j + 1] == 0)))
+		{
+			env->heat[*i][*j + 1] = env->heat[*i][*j] + 1;
+			*check = 1;
+		}
+		if ((*i - 1 >= 0) && ((env->heat[*i - 1][*j] >
+env->heat[*i][*j] + 1) || (env->heat[*i - 1][*j] == 0)))
+		{
+			env->heat[*i - 1][*j] = env->heat[*i][*j] + 1;
+			*check = 1;
+		}
+		if ((*j - 1 >= 0) && ((env->heat[*i][*j - 1] >
+env->heat[*i][*j] + 1) || (env->heat[*i][*j - 1] == 0)))
+		{
+			env->heat[*i][*j - 1] = env->heat[*i][*j] + 1;
+			*check = 1;
+		}
+	}
+}
+
 void	createheat(t_env *env)
 {
 	int i;
@@ -51,33 +85,7 @@ void	createheat(t_env *env)
 			j = 0;
 			while (j < env->size_x)
 			{
-				if (env->heat[i][j] > 0)
-				{
-					if (i + 1 < env->size_y &&
-((env->heat[i + 1][j] > env->heat[i][j] + 1) || (env->heat[i + 1][j] == 0)))
-					{
-						env->heat[i + 1][j] = env->heat[i][j] + 1;
-						check = 1;
-					}
-					if (j + 1 < env->size_x &&
-((env->heat[i][j + 1] > env->heat[i][j] + 1) || (env->heat[i][j + 1] == 0)))
-					{
-						env->heat[i][j + 1] = env->heat[i][j] + 1;
-						check = 1;
-					}
-					if (i - 1 >= 0 &&
-((env->heat[i - 1][j] > env->heat[i][j] + 1) || (env->heat[i - 1][j] == 0)))
-					{
-						env->heat[i - 1][j] = env->heat[i][j] + 1;
-						check = 1;
-					}
-					if (j - 1 >= 0 &&
-((env->heat[i][j - 1] > env->heat[i][j] + 1) || (env->heat[i][j - 1] == 0)))
-					{
-						env->heat[i][j - 1] = env->heat[i][j] + 1;
-						check = 1;
-					}
-				}
+				ma_fonction(&j, &i, &check, env);
 				j++;
 			}
 			i++;
