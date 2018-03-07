@@ -6,7 +6,7 @@
 /*   By: atgerard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 16:04:52 by atgerard          #+#    #+#             */
-/*   Updated: 2018/03/07 16:05:50 by atgerard         ###   ########.fr       */
+/*   Updated: 2018/03/07 21:32:40 by athanael         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	put_pieces(t_env *env)
 	ft_putchar(' ');
 	ft_putnbr(env->finalx);
 	ft_putchar('\n');
-	free(env->map);
-	free(env->piece);
-	env->map = NULL;
-	env->piece = NULL;
+//	free(env->map);
+//	free(env->piece);
+//	env->map = NULL;
+//	env->piece = NULL;
 }
