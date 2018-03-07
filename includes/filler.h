@@ -6,14 +6,14 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 04:07:17 by yarypert          #+#    #+#             */
-/*   Updated: 2018/03/05 13:15:38 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/03/07 16:24:43 by atgerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 
 typedef struct	s_env
 {
@@ -32,6 +32,18 @@ int				mapi;
 int				mapj;
 int				finalx;
 int				finaly;
+int				count;
+int				countend;
+int				contact;
+char			*line;
+int				c;
+int				co;
+int				pi;
+int				pj;
+int				heatsave;
+int				i;
+int				j;
+int				check;
 }				t_env;
 
 /*
@@ -45,9 +57,10 @@ int				get_pieces(t_env *env, char *line);
  * ** canplace.c
  * */
 
-void			put_pieces(t_env *env);
+int				countpiece(t_env *env);
 int				compare(t_env *env);
 void			findposition(t_env *env);
+int				dtw(int i, int j, t_env *env);
 
 /*
  * ** heatmap.c
@@ -56,5 +69,11 @@ void			findposition(t_env *env);
 void			initheatmap(t_env *env);
 void			createheat(t_env *env);
 void			intheatmap(t_env *env);
+
+/*
+ * ** put_pieces.c
+ * */
+
+void			put_pieces(t_env *env);
 
 #endif
