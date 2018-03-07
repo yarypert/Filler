@@ -6,13 +6,13 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 02:42:41 by yarypert          #+#    #+#             */
-/*   Updated: 2018/03/05 13:14:55 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/03/07 14:16:55 by atgerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/filler.h"
 
-int main(void)
+int		main(void)
 {
 	char	*line;
 	t_env	*env;
@@ -21,12 +21,14 @@ int main(void)
 		return (-1);
 	get_next_line(0, &line);
 	env->player = (ft_atoi(line + 10) == 1) ? 'O' : 'X';
-	env->enemy = (env->player == 'O'? 'X': 'O');
-	while (1337)
+	env->enemy = env->player == 'O' ? 'X' : 'O';
+	free (line);
+	while (1)
 	{
 		get_next_line(0, &line);
 		env->size_y = ft_atoi(&line[8]);
 		env->size_x = ft_atoi(&line[11]);
+		free (line);
 		get_map(env);
 		intheatmap(env);
 		initheatmap(env);
@@ -34,8 +36,8 @@ int main(void)
 		findposition(env);
 		put_pieces(env);
 		if (env->end == 1)
-			break;
+			break ;
 	}
 	free(env);
-	return 0;
+	return (0);
 }

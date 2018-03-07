@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 13:17:21 by yarypert          #+#    #+#             */
-/*   Updated: 2018/03/05 13:19:37 by yarypert         ###   ########.fr       */
+/*   Updated: 2018/03/07 14:24:06 by atgerard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 int		get_map(t_env *env)
 {
 	char	*line;
-	int	i;
+	int		i;
 
 	i = 0;
 	if (!env->map)
-		if (!(env->map = ft_tabnew(env->size_y, env->size_x)))
+		if (!(env->map = ft_tabnew(env->size_y, env->size_x + 1)))
 			return (-1);
 	get_next_line(0, &line);
-	while(i <= env->size_y)
+	free(line);
+	while (i <= env->size_y)
 	{
 		get_next_line(0, &line);
 		if (ft_isdigit(line[0]))
@@ -31,7 +32,8 @@ int		get_map(t_env *env)
 			get_pieces(env, line);
 		i++;
 	}
-	return(0);
+	free (line);
+	return (0);
 }
 
 int		get_pieces(t_env *env, char *line)
@@ -47,14 +49,16 @@ int		get_pieces(t_env *env, char *line)
 	j++;
 	env->psize_x = ft_atoi(&line[j]);
 	if (!env->piece)
-		if (!(env->piece = ft_tabnew(env->psize_y, env->psize_x)))
+	{
+		if (!(env->piece = ft_tabnew(env->psize_y + 1, env->psize_x)))
 			return (-1);
+	}
 	while (i < env->psize_y)
 	{
 		get_next_line(0, &line);
 		env->piece[i] = ft_strdup(line);
 		i++;
 	}
+	free (line);
 	return (0);
 }
-
