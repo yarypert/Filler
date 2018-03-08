@@ -6,14 +6,14 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 04:07:17 by yarypert          #+#    #+#             */
-/*   Updated: 2018/03/07 16:24:43 by atgerard         ###   ########.fr       */
+/*   Updated: 2018/03/08 19:51:43 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLER_H
 # define FILLER_H
 
-# include "../libft/includes/libft.h"
+# include "../libft/libft.h"
 
 typedef struct	s_env
 {
@@ -73,7 +73,10 @@ void			intheatmap(t_env *env);
 /*
  * ** put_pieces.c
  * */
-
+void			del_map(t_env *env);
+void			del_heat(t_env *env);
+void			del_piece(t_env *env);
+void			del_struct(t_env *env);
 void			put_pieces(t_env *env);
 
 #endif

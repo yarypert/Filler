@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 04:18:51 by yarypert          #+#    #+#             */
-/*   Updated: 2018/03/07 16:14:33 by atgerard         ###   ########.fr       */
+/*   Updated: 2018/03/08 19:55:34 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,5 @@ void	findposition(t_env *env)
 		env->mapi++;
 	}
 	if (env->countend == (env->size_y + 1) * (env->size_x + 1))
-		env->end = 1;
+		 env->end = 1;
 }

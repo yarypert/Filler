@@ -6,7 +6,7 @@
 /*   By: yarypert <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 04:19:03 by yarypert          #+#    #+#             */
-/*   Updated: 2018/03/07 17:28:21 by atgerard         ###   ########.fr       */
+/*   Updated: 2018/03/08 19:57:43 by yarypert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	intheatmap(t_env *env)
 	int	i;
 
 	i = 0;
-	env->heat = (int **)ft_memalloc(sizeof(int *) * env->size_y);
+	env->heat = (int **)ft_memalloc(sizeof(int *) * (env->size_y + 1));
 	while (i < env->size_y)
 	{
 		env->heat[i] = (int *)ft_memalloc(sizeof(int) * env->size_x);
